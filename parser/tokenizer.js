@@ -48,7 +48,7 @@ function Tokenize(untokenized) {
         thistokentype=TokenTypes.NONE;
       }
       if (chartype==CharTypes.PAR_OPEN) {
-        c
+        tokenizedsequence.push(thistoken);
         thistoken="";
         paras=1;
         thistokentype=TokenTypes.PARAS;
@@ -62,7 +62,11 @@ function Tokenize(untokenized) {
       else if (chartype==CharTypes.PAR_CLOSE) {
         thistoken+=untokenized[i];
         pars-=1
-        if (pars==0) {thistokentype=TokenTypes.NONE;}
+        if (pars==0) {
+          tokenizedsequence.push(thistoken);
+          thistoken=""
+          thistokentype=TokenTypes.NONE;
+        }
       }
       else {
         thistoken+=untokenized[i];
