@@ -4,7 +4,7 @@
     <script>
       function Roll() {
         var rollmax = parseInt(document.getElementById('dieSize').value);
-        var roll = Math.floor(Math.random() * rollmax)
+        var roll = Math.floor(Math.random() * rollmax)+1
         document.getElementById('rollOutput').innerHTML = roll;
       }
     </script>
