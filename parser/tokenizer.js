@@ -57,12 +57,12 @@ function Tokenize(untokenized) {
     else if (thistokentype==TokenTypes.PARAS) {
       if (chartype==CharTypes.PAR_OPEN) {
         thistoken+=untokenized[i];
-        pars+=1
+        paras+=1
       }
       else if (chartype==CharTypes.PAR_CLOSE) {
         thistoken+=untokenized[i];
-        pars-=1
-        if (pars==0) {
+        paras-=1
+        if (paras==0) {
           tokenizedsequence.push(thistoken);
           thistoken=""
           thistokentype=TokenTypes.NONE;
