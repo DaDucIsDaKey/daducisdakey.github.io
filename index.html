@@ -3,11 +3,11 @@
   <head>
     <script>
       function Roll() {
-        let rollmax = parseInt(document.getElementById('dieSize').value);
-        let rollnum = parseInt(document.getElementById('dieNumber').value);
+        let rollMax = parseInt(document.getElementById('dieSize').value);
+        let rollNum = parseInt(document.getElementById('dieNumber').value);
         let roll = 0;
         for(let i = 0; i < rollNum; i++) {
-          roll += Math.floor(Math.random() * rollmax) + 1;
+          roll += Math.floor(Math.random() * rollMax) + 1;
         }
         document.getElementById('rollOutput').innerHTML = roll;
       }
@@ -15,7 +15,7 @@
   </head>
   <body>
   
-  <h2>You should go gambling.?</h2>
+  <h2>You should go gambling!</h2>
     
     <p>Roll dice below.</p>
     
