@@ -3,8 +3,12 @@
   <head>
     <script>
       function Roll() {
-        var rollmax = parseInt(document.getElementById('dieSize').value);
-        var roll = Math.floor(Math.random() * rollmax)+1
+        let rollmax = parseInt(document.getElementById('dieSize').value);
+        let rollnum = parseInt(document.getElementById('dieNumber').value);
+        let roll = 0;
+        for(let i = 0; i < rollNum; i++) {
+          roll += Math.floor(Math.random() * rollmax) + 1;
+        }
         document.getElementById('rollOutput').innerHTML = roll;
       }
     </script>
@@ -15,7 +19,7 @@
     
     <p>Roll dice below.</p>
     
-    <p>I would like to roll a <input id='dieSize' type='number'>-sided die.</p>
+    <p>I would like to roll <input id='dieNumber' type='number'>d<input id='dieSize' type='number'>.</p>
   
     <button onclick="Roll()">Roll!</button>
   
