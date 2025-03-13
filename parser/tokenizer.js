@@ -1,4 +1,4 @@
-function Tokenize(untokenized) {
+export function Tokenize(untokenized) {
   const CharTypes = ({
     GARBAGE: 0,
     DIGIT: 1,
