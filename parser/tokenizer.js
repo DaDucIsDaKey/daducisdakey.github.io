@@ -73,5 +73,6 @@ function Tokenize(untokenized) {
       }
     }
   }
+  tokenizedsequence.push(thistoken)
   return tokenizedsequence;
 }
