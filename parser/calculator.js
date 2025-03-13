@@ -96,3 +96,6 @@ function Calculator(untokenized) {
   }
   return inarr[0];
 }
+console.log("1d6")
+console.log("3d6")
+console.log("(4d6)d6")
