@@ -35,6 +35,7 @@ function Tokenize(untokenized) {
       if (chartype==CharTypes.PAR_OPEN) {
         paras=1;
         thistokentype=TokenTypes.PARAS;
+        thistoken+=untokenized[i];
       }
     }
     else if (thistokentype==TokenTypes.NUMBER) {
