@@ -89,9 +89,10 @@ function Calculator(untokenized) {
         for (let j=0;j<parseInt(inarr[i-1]);j++) {
           r+=Math.floor(Math.random()*parseInt(inarr[i+1]))+1
         }
-        inarr.splice(i,3,r.toString())
+        inarr.splice(i-1,3,r.toString())
         i--;
       }
     }
   }
+  return inarr[0];
 }
