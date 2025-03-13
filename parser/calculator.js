@@ -1,6 +1,6 @@
 function Calculator(untokenized) {
   let inarr = Tokenize(untokenized);
-  for (let _pass=0;_pass<4) {
+  for (let _pass=0;_pass<4;_pass++) {
     for(let i=0;i<inarr.length;i++) {
       if (pass==0 && inarr[i][0] == "(")) {
         inarr[i]=Calculator(inarr[i].substring(1,inarr[i].length))
