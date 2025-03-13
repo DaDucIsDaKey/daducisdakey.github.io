@@ -1,34 +1,17 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <script>
-      function Roll() {
-        let rollMax = parseInt(document.getElementById('dieSize').value);
-        let rollNum = parseInt(document.getElementById('dieNumber').value);
-        let roll = 0;
-        for(let i = 0; i < rollNum; i++) {
-          roll += Math.floor(Math.random() * rollMax) + 1;
-        }
-        document.getElementById('rollOutput').innerHTML = roll;
-      }
-    </script>
+    <script src="parser/calculator.js"></script>
   </head>
   <body>
   
-  <h2>You should go gambling!</h2>
-    
+    <h2>You should go gambling!</h2>
     <p>Roll dice below.</p>
-    
     <p>I would like to roll <input id='dieNumber' type='number'>d<input id='dieSize' type='number'>.</p>
-  
-    <button onclick="Roll()">Roll!</button>
-  
+    <button onclick="rollOutput.innerHTML=Calculator();">Roll!</button>
     <h1 id='rollOutput'>Output</h1>
-    
     <button onclick="document.getElementById('myImage').src='bulbon.png'">Turn on the light</button>
-    
     <img id="myImage" src="bulboff.png" style="width:100px">
-    
     <button onclick="document.getElementById('myImage').src='bulboff.png'">Turn off the light</button>
     
   </body>
