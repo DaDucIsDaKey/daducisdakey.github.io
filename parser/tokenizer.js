@@ -73,6 +73,5 @@ function Tokenize(untokenized) {
       }
     }
   }
-  console.log(tokenizedsequence);
+  return tokenizedsequence;
 }
-Tokenize("1+2+(3/4)");
