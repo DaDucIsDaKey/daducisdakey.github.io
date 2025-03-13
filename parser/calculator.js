@@ -94,7 +94,7 @@ function Calculator(untokenized) {
       }
     }
   }
-  return inarr[0];
+  return inarr;
 }
 console.log("1d6")
 console.log("3d6")
