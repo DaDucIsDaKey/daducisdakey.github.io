@@ -90,24 +90,24 @@ function Calculator(untokenized) {
         for (let j=0;j<parseInt(inarr[i-1]);j++) {
           r+=Math.floor(Math.random()*parseInt(inarr[i+1]))+1
         }
-        inarr.splice(i-1,3,r.toString())
-        i--;
+        inarr.splice(i-1,3,r.toString();
+        if (i!=0) {i--;}
       }
       else if (_pass==2 && inarr[i] == "*") {
         inarr.splice(i-1,3,(parseInt(inarr[i-1])*parseInt(inarr[i+1])).toString())
-        i--;
+        if (i!=0) {i--;}
       }
       else if (_pass==2 && inarr[i] == "/") {
         inarr.splice(i-1,3,(Math.round(parseInt(inarr[i-1])/parseInt(inarr[i+1]))).toString())
-        i--;
+        if (i!=0) {i--;}
       }
       else if (_pass==3 && inarr[i] == "+") {
         inarr.splice(i-1,3,(parseInt(inarr[i-1])+parseInt(inarr[i+1])).toString())
-        i--;
+        if (i!=0) {i--;}
       }
       else if (_pass==3 && inarr[i] == "-") {
         inarr.splice(i-1,3,(parseInt(inarr[i-1])-parseInt(inarr[i+1])).toString())
-        i--;
+        if (i!=0) {i--;}
       }
     }
   }
