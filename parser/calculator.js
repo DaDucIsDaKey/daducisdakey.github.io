@@ -85,7 +85,7 @@ function Calculator(untokenized) {
       if (_pass==0 && inarr[i][0] == "(") {
         inarr[i]=Calculator(inarr[i].substring(1,inarr[i].length))
       }
-      else if (_pass==1 && inarr[i] == "d") {
+      else if (_pass==1 && inarr[i] == "d" && i>0) {
         let r = 0
         for (let j=0;j<parseInt(inarr[i-1]);j++) {
           r+=Math.floor(Math.random()*parseInt(inarr[i+1]))+1
