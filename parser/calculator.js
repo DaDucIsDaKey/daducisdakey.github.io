@@ -94,6 +94,9 @@ function Calculator(untokenized) {
           mods.add(inarr[i+m]);
           inarr.splice(i+m,1);
         }
+        if (parseInt(inarr[i-1])>100000) {
+          return "Please Stop."
+        }
         for (let j=0;j<parseInt(inarr[i-1]);j++) {
           let thisr = ((Math.floor(Math.random()*parseInt(inarr[i+1]))+1))
           if (mods.has("s")) {
