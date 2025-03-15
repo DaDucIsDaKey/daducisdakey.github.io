@@ -88,29 +88,25 @@ function Calculator(untokenized) {
         inarr[i]=Calculator(inarr[i].substring(1,inarr[i].length))
       }
       else if (_pass==1 && inarr[i] == "d" && i>0) {
-        let r = 0
         let mods = new Set()
-        for (let m=2; inarr[i+m]=="s" || inarr[i+m]=="k";m++) {
+        let m=2;
+        for (m=2; inarr[i+m]=="s" || inarr[i+m]=="k";m++) {
           mods.add(inarr[i+m]);
-          inarr.splice(i+m,1);
         }
+        inarr.splice(i+2,m-2);
         if (parseInt(inarr[i-1])>100000) {
-          return "Please Stop."
+          return "Please Stop.";
         }
+        let outs=[]
         for (let j=0;j<parseInt(inarr[i-1]);j++) {
           let thisr = ((Math.floor(Math.random()*parseInt(inarr[i+1]))+1))
-          if (mods.has("s")) {
-            r+=thisr;
-          }
-          else {
-            inarr.splice(i+2,0,thisr.toString());
-          }
+          outs.push(thisr.toString());
         }
         if (mods.has("s")) {
-          inarr.splice(i-1,3,r.toString());
+          inarr.splice(i-1,3,outs.reduce((total,current)=>total+current).toString());
         }
         else {
-          inarr.splice(i-1,3)
+          inarr.slice(0,i-1).concat(outs,inarr.slice(i+2))
         }
         if (i!=0) {i--;}
       }
