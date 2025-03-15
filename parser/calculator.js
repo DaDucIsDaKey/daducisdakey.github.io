@@ -87,10 +87,25 @@ function Calculator(untokenized) {
       }
       else if (_pass==1 && inarr[i] == "d" && i>0) {
         let r = 0
-        for (let j=0;j<parseInt(inarr[i-1]);j++) {
-          r+=Math.floor(Math.random()*parseInt(inarr[i+1]))+1
+        let mods = new Set()
+        for (let m=2; inarr[i+m]=="s" || inarr[i+m]=="k";m++) {
+          mods.add(inarr[i+m]);
         }
-        inarr.splice(i-1,3,r.toString());
+        for (let j=0;j<parseInt(inarr[i-1]);j++) {
+          let thisr = ((Math.floor(Math.random()*parseInt(inarr[i+1]))+1))
+          if (mods.has("s")) {
+            r+=thisr
+          }
+          else {
+            inarr.splice(i+2,0,thisr.toString());
+          }
+        }
+        if (mods.has("s")) {
+          inarr.splice(i-1,3,r.toString());
+        }
+        else {
+          inarr.splice(i-1,3)
+        }
         if (i!=0) {i--;}
       }
       else if (_pass==2 && inarr[i] == "*") {
@@ -111,8 +126,5 @@ function Calculator(untokenized) {
       }
     }
   }
-  return inarr[0];
+  return inarr;
 }
-console.log("1d6")
-console.log("3d6")
-console.log("(4d6)d6")
