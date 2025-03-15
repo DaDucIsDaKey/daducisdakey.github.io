@@ -90,7 +90,7 @@ function Calculator(untokenized) {
         let mods = new Set()
         for (let m=2; inarr[i+m]=="s" || inarr[i+m]=="k";m++) {
           mods.add(inarr[i+m]);
-          inarr.splice(i+m,2);
+          inarr.splice(i+m,1);
         }
         for (let j=0;j<parseInt(inarr[i-1]);j++) {
           let thisr = ((Math.floor(Math.random()*parseInt(inarr[i+1]))+1))
