@@ -19,7 +19,7 @@ function Tokenize(untokenized) {
   for(let i = 0; i<untokenized.length; i++) {
     let chartype=0
     if (untokenized.charCodeAt(i)>=48 && untokenized.charCodeAt(i)<=57) {chartype=CharTypes.DIGIT;}
-    else if (untokenized.charCodeAt(i)==42 || untokenized.charCodeAt(i)==43 || untokenized.charCodeAt(i)==47 || untokenized.charCodeAt(i)==100) {chartype=CharTypes.OPERATOR;}
+    else if (untokenized.charCodeAt(i)==42 || untokenized.charCodeAt(i)==43 || untokenized.charCodeAt(i)==47 || (untokenized.charCodeAt(i)>=97 && untokenized.charCodeAt(i)<=122)) {chartype=CharTypes.OPERATOR;}
     else if (untokenized.charCodeAt(i)==45) {chartype=CharTypes.NEGATIVE;}
     else if (untokenized.charCodeAt(i)==40) {chartype=CharTypes.PAR_OPEN;}
     else if (untokenized.charCodeAt(i)==41) {chartype=CharTypes.PAR_CLOSED;}
