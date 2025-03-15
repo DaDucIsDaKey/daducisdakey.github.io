@@ -74,7 +74,9 @@ function Tokenize(untokenized) {
       }
     }
   }
-  tokenizedsequence.push(thistoken)
+  if (thistokentype!=TokenTypes.NONE) {
+    tokenizedsequence.push(thistoken)
+  }
   return tokenizedsequence;
 }
 
