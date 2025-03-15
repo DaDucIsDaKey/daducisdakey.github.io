@@ -106,7 +106,12 @@ function Calculator(untokenized) {
           inarr.splice(i-1,3,outs.reduce((total,current)=>total+current).toString());
         }
         else {
-          inarr.slice(0,i-1).concat(outs,inarr.slice(i+2))
+          if (i>1) {
+            inarr.slice(0,i-1).concat(outs,inarr.slice(i+2))
+          }
+          else {
+            outs.concat(inarr.slice(i+2))
+          }
         }
         if (i!=0) {i--;}
       }
