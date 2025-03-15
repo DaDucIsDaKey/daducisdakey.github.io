@@ -90,12 +90,12 @@ function Calculator(untokenized) {
         let mods = new Set()
         for (let m=2; inarr[i+m]=="s" || inarr[i+m]=="k";m++) {
           mods.add(inarr[i+m]);
-          inarr.splice(i+m,1)
+          inarr.splice(i+m,2);
         }
         for (let j=0;j<parseInt(inarr[i-1]);j++) {
           let thisr = ((Math.floor(Math.random()*parseInt(inarr[i+1]))+1))
           if (mods.has("s")) {
-            r+=thisr
+            r+=thisr;
           }
           else {
             inarr.splice(i+2,0,thisr.toString());
@@ -110,19 +110,19 @@ function Calculator(untokenized) {
         if (i!=0) {i--;}
       }
       else if (_pass==2 && inarr[i] == "*") {
-        inarr.splice(i-1,3,(parseInt(inarr[i-1])*parseInt(inarr[i+1])).toString())
+        inarr.splice(i-1,3,(parseInt(inarr[i-1])*parseInt(inarr[i+1])).toString());
         if (i!=0) {i--;}
       }
       else if (_pass==2 && inarr[i] == "/") {
-        inarr.splice(i-1,3,(Math.round(parseInt(inarr[i-1])/parseInt(inarr[i+1]))).toString())
+        inarr.splice(i-1,3,(Math.round(parseInt(inarr[i-1])/parseInt(inarr[i+1]))).toString());
         if (i!=0) {i--;}
       }
       else if (_pass==3 && inarr[i] == "+") {
-        inarr.splice(i-1,3,(parseInt(inarr[i-1])+parseInt(inarr[i+1])).toString())
+        inarr.splice(i-1,3,(parseInt(inarr[i-1])+parseInt(inarr[i+1])).toString());
         if (i!=0) {i--;}
       }
       else if (_pass==3 && inarr[i] == "-") {
-        inarr.splice(i-1,3,(parseInt(inarr[i-1])-parseInt(inarr[i+1])).toString())
+        inarr.splice(i-1,3,(parseInt(inarr[i-1])-parseInt(inarr[i+1])).toString());
         if (i!=0) {i--;}
       }
     }
