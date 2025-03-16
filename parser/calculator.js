@@ -102,7 +102,7 @@ function Calculator(untokenized) {
           outs.push(thisr.toString());
         }
         if (mods.has("s")) {
-          inarr.splice(i-1,3,outs.reduce((total,current)=>toString(parseInt(total)+parseInt(current))).toString());
+          inarr.splice(i-1,3,outs.reduce((total,current)=>(parseInt(total)+parseInt(current)).toString()).toString());
         }
         else {
           if (i>1) {
