@@ -92,7 +92,7 @@ function Calculator(untokenized) {
       else if (_pass==1 && inarr[i] == "d" && i>0) {
         let mods = new Set()
         let m=2;
-        for (m=2; inarr[i+m]=="s" || inarr[i+m]=="k";m++) {
+        for (m=2; inarr[i+m]=="s" || inarr[i+m]=="d";m++) {
           mods.add(inarr[i+m]);
         }
         inarr.splice(i+2,m-2);
