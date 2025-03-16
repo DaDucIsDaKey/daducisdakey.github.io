@@ -114,7 +114,7 @@ function Calculator(untokenized) {
           }
         }
         if (i!=0) {i--;}
-        console.log("1 roll complete")
+        console.log(inarr)
       }
 
       
