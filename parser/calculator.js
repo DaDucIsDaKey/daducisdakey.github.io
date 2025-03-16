@@ -92,7 +92,6 @@ function Calculator(untokenized) {
       else if (_pass==1 && inarr[i] == "d" && i>0) {
         let mods = new Set()
         let m=2;
-        console.log("Testing")
         for (m=2; inarr[i+m]=="s" || inarr[i+m]=="k";m++) {
           mods.add(inarr[i+m]);
         }
