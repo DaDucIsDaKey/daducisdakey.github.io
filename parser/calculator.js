@@ -87,6 +87,8 @@ function Calculator(untokenized) {
       if (_pass==0 && inarr[i][0] == "(") {
         inarr[i]=Calculator(inarr[i].substring(1,inarr[i].length))
       }
+
+      
       else if (_pass==1 && inarr[i] == "d" && i>0) {
         let mods = new Set()
         let m=2;
@@ -114,7 +116,10 @@ function Calculator(untokenized) {
           }
         }
         if (i!=0) {i--;}
+        console.log("1 roll complete")
       }
+
+      
       else if (_pass==2 && inarr[i] == "*") {
         inarr.splice(i-1,3,(parseInt(inarr[i-1])*parseInt(inarr[i+1])).toString());
         if (i!=0) {i--;}
