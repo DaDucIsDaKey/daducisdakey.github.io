@@ -106,10 +106,10 @@ function Calculator(untokenized) {
         }
         else {
           if (i>1) {
-            inarr.slice(0,i-1).concat(outs,inarr.slice(i+2))
+            inarr=inarr.slice(0,i-1).concat(outs,inarr.slice(i+2))
           }
           else {
-            outs.concat(inarr.slice(i+2))
+            inarr=outs.concat(inarr.slice(i+2))
           }
         }
         if (i!=0) {i--;}
