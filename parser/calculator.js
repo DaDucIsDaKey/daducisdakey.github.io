@@ -82,29 +82,37 @@ function Tokenize(untokenized) {
 
 function Calculator(untokenized) {
   let inarr = Tokenize(untokenized);
-  for (let _pass=0;_pass<4;_pass++) {
+  for (let _pass=0;_pass<5;_pass++) {
+    var lastInt = -1;
+    var hasBeenInt = false;
     for(let i=0;i<inarr.length;i++) {
+      if (inarr[i].charCodeAt(0)>=48 && inarr[i].charCodeAt(0)<=57 && !hasBeenInt) {
+        lastInt = i;
+        hasBeenInt = true;
+      }
+      else if (!(inarr[i].charCodeAt(0)>=48 && inarr[i].charCodeAt(0)<=57)) {
+        hasBeenInt = false;
+      }
       if (_pass==0 && inarr[i][0] == "(") {
         inarr[i]=Calculator(inarr[i].substring(1,inarr[i].length))
       }
-
-      
       else if (_pass==1 && inarr[i] == "d" && i>0) {
-        let mods = new Set()
+        /*let mods = new Set()
         let m=2;
         for (m=2; inarr[i+m]=="s" || inarr[i+m]=="d";m++) {
           mods.add(inarr[i+m]);
         }
-        inarr.splice(i+2,m-2);
+        inarr.splice(i+2,m-2);*/
         let outs=[]
         for (let j=0;j<parseInt(inarr[i-1]);j++) {
           let thisr = ((Math.floor(Math.random()*parseInt(inarr[i+1]))+1))
           outs.push(thisr.toString());
         }
+        /*
         if (mods.has("s")) {
           inarr.splice(i-1,3,outs.reduce((total,current)=>(parseInt(total)+parseInt(current)).toString()).toString());
-        }
-        else {
+        }*/
+        {
           if (i>1) {
             inarr=inarr.slice(0,i-1).concat(outs,inarr.slice(i+2))
           }
@@ -115,21 +123,22 @@ function Calculator(untokenized) {
         if (i!=0) {i--;}
         console.log(inarr)
       }
-
-      
-      else if (_pass==2 && inarr[i] == "*") {
-        inarr.splice(i-1,3,(parseInt(inarr[i-1])*parseInt(inarr[i+1])).toString());
+      else if (_pass==2 && inarr[i]="s") {
+        inarr.splice(lastInt,i-LastInt+1,inarr.slice(lastInt,i).reduce((total,current)=>(parseInt(total)+parseInt(current)).toString()).toString());
+      }
+      else if (_pass==3 && inarr[i] == "*") {
+        inarr.splice(LastInt,i-LastInt+2,(parseInt(inarr[i-1])*parseInt(inarr[i+1])).toString());
         if (i!=0) {i--;}
       }
-      else if (_pass==2 && inarr[i] == "/") {
+      else if (_pass==3 && inarr[i] == "/") {
         inarr.splice(i-1,3,(Math.round(parseInt(inarr[i-1])/parseInt(inarr[i+1]))).toString());
         if (i!=0) {i--;}
       }
-      else if (_pass==3 && inarr[i] == "+") {
+      else if (_pass==4 && inarr[i] == "+") {
         inarr.splice(i-1,3,(parseInt(inarr[i-1])+parseInt(inarr[i+1])).toString());
         if (i!=0) {i--;}
       }
-      else if (_pass==3 && inarr[i] == "-") {
+      else if (_pass==4 && inarr[i] == "-") {
         inarr.splice(i-1,3,(parseInt(inarr[i-1])-parseInt(inarr[i+1])).toString());
         if (i!=0) {i--;}
       }
