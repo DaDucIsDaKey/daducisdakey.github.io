@@ -22,7 +22,7 @@ function Tokenize(untokenized) {
     else if (untokenized.charCodeAt(i)==42 || untokenized.charCodeAt(i)==43 || untokenized.charCodeAt(i)==47 || (untokenized.charCodeAt(i)>=97 && untokenized.charCodeAt(i)<=122)) {chartype=CharTypes.OPERATOR;}
     else if (untokenized.charCodeAt(i)==45) {chartype=CharTypes.NEGATIVE;}
     else if (untokenized.charCodeAt(i)==40) {chartype=CharTypes.PAR_OPEN;}
-    else if (untokenized.charCodeAt(i)==41) {chartype=CharTypes.PAR_CLOSED;}
+    else if (untokenized.charCodeAt(i)==41) {chartype=CharTypes.PAR_CLOSE;}
     else {chartype=CharTypes.GARBAGE;}
     if (thistokentype==TokenTypes.NONE) {
       if (chartype==CharTypes.DIGIT || chartype==CharTypes.NEGATIVE) {
@@ -83,14 +83,13 @@ function Tokenize(untokenized) {
 function Calculator(untokenized) {
   let inarr = Tokenize(untokenized);
   for (let _pass=0;_pass<4;_pass++) {
+    let lastnum = -1;
     for(let i=0;i<inarr.length;i++) {
       if (_pass==0 && inarr[i][0] == "(") {
         inarr[i]=Calculator(inarr[i].substring(1,inarr[i].length))
       }
-
-      
       else if (_pass==1 && inarr[i] == "d" && i>0) {
-        let mods = new Set()
+        let mods = new Set();
         let m=2;
         for (m=2; inarr[i+m]=="s" || inarr[i+m]=="d";m++) {
           mods.add(inarr[i+m]);
