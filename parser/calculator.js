@@ -5,7 +5,6 @@ function Parse(inString) {
     '*':10,
     '/':10,
     '^':15,
-    '**':15,
     'd':25
   });
   const TokenTypes = Object.freeze({
@@ -22,14 +21,6 @@ function Parse(inString) {
   for(let i = 0; i<inString.length; i++) {
     currcharnum = inString.charCodeAt(i);
     if ((currcharnum>=48 && currcharnum<=57) || currcharnum==46 || (currcharnum==45 && currTT!=TokenTypes.NUMBER)) {
-      if (currTT==TokenTypes.OPERATOR) {
-      	let priority = OperatorPrios[currtoken]+1000*paras;
-        while (operators.length>0 && priority<=operators.at(-1)[1]) {
-          Evaluate(operators.pop(),operands);
-        }
-        operators.push([currtoken,priority]);
-      	currtoken="";
-      }
       currtoken+=inString[i];
       currTT=TokenTypes.NUMBER;
     }
@@ -38,8 +29,12 @@ function Parse(inString) {
       	operands.push(+currtoken);
       	currtoken="";
       }
-      currtoken+=inString[i];
-      currTT=TokenTypes.OPERATOR;
+      let priority = OperatorPrios[inString[i]]+1000*paras;
+      while (operators.length>0 && priority<=operators.at(-1)[1]) {
+      	Evaluate(operators.pop(),operands);
+      }
+      operators.push([currcharnum,priority]);
+      currTT=TokenTypes.NONE;
     }
     else if (currcharnum==40) {
     	paras+=1;
