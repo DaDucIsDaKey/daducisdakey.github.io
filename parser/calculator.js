@@ -22,7 +22,7 @@ function Parse(inString) {
       currtoken+=inString[i];
       currTT=TokenTypes.NUMBER;
     }
-    else if (currcharnum==42 || currcharnum==43 || currcharnum==45 || currcharnum==47 || currcharnum==100) {
+    else if (currcharnum==42 || currcharnum==43 || currcharnum==45 || currcharnum==47 || currcharnum==94 || currcharnum==100) {
       if (currTT!=TokenTypes.NONE) {
       	operands.push(+currtoken);
       	currtoken="";
@@ -46,7 +46,7 @@ function Parse(inString) {
   while (operators.length>0) {
     Evaluate(operators.pop(),operands);
   }
-  return operands[0];
+  return operands.pop();
 }
 
 function Evaluate(op,operands) {
@@ -60,7 +60,14 @@ function Evaluate(op,operands) {
     operands.push(-operands.pop()+operands.pop());
   }
   else if (op[0]==47) {
-    operands.push(operands.pop()/operands.pop());
+    let b = operands.pop();
+    let a = operands.pop();
+    operands.push(a/b);
+  }
+  else if (op[0]==94) {
+    let b = operands.pop();
+    let a = operands.pop();
+    operands.push(a**b);
   }
   else if (op[0]==100) {
     let b = operands.pop();
