@@ -4,7 +4,8 @@ function Parse(inString) {
     '-':5,
     '*':10,
     '/':10,
-    'd':15
+    '^':15,
+    'd':25
   });
   const TokenTypes = Object.freeze({
     NUMBER:1,
