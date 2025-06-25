@@ -1,138 +1,85 @@
-function Tokenize(untokenized) {
-  const CharTypes = ({
-    GARBAGE: 0,
-    DIGIT: 1,
-    OPERATOR: 2,
-    NEGATIVE: 3,
-    PAR_OPEN: 4,
-    PAR_CLOSE: 5
+function Parse(inString) {
+  const OperatorPrios = Object.freeze({
+    '+':5,
+    '-':5,
+    '*':10,
+    '/':10,
+    'd':15
   });
-  const TokenTypes = ({
-    NONE: 0,
-    NUMBER: 1,
-    PARAS: 2
+  const TokenTypes = Object.freeze({
+    NUMBER:1,
+    NONE:0,
   });
-  let tokenizedsequence = [];
-  let thistoken="";
-  let thistokentype=TokenTypes.NONE;
-  let paras=0;
-  for(let i = 0; i<untokenized.length; i++) {
-    let chartype=0
-    if (untokenized.charCodeAt(i)>=48 && untokenized.charCodeAt(i)<=57) {chartype=CharTypes.DIGIT;}
-    else if (untokenized.charCodeAt(i)==42 || untokenized.charCodeAt(i)==43 || untokenized.charCodeAt(i)==47 || (untokenized.charCodeAt(i)>=97 && untokenized.charCodeAt(i)<=122)) {chartype=CharTypes.OPERATOR;}
-    else if (untokenized.charCodeAt(i)==45) {chartype=CharTypes.NEGATIVE;}
-    else if (untokenized.charCodeAt(i)==40) {chartype=CharTypes.PAR_OPEN;}
-    else if (untokenized.charCodeAt(i)==41) {chartype=CharTypes.PAR_CLOSE;}
-    else {chartype=CharTypes.GARBAGE;}
-    if (thistokentype==TokenTypes.NONE) {
-      if (chartype==CharTypes.DIGIT || chartype==CharTypes.NEGATIVE) {
-        thistoken+=untokenized[i];
-        thistokentype=TokenTypes.NUMBER;
-      }
-      if (chartype==CharTypes.OPERATOR) {
-        tokenizedsequence.push(untokenized[i]);
-      }
-      if (chartype==CharTypes.PAR_OPEN) {
-        paras=1;
-        thistokentype=TokenTypes.PARAS;
-        thistoken+=untokenized[i];
-      }
+  let operands = [];
+  let operators = [];
+  let paras = 0;
+  let currcharnum = 0;
+  let currtoken = "";
+  let currTT=TokenTypes.NONE;
+  for(let i = 0; i<inString.length; i++) {
+    currcharnum = inString.charCodeAt(i);
+    if ((currcharnum>=48 && currcharnum<=57) || currcharnum==46 || (currcharnum==45 && currTT!=TokenTypes.NUMBER)) {
+      currtoken+=inString[i];
+      currTT=TokenTypes.NUMBER;
     }
-    else if (thistokentype==TokenTypes.NUMBER) {
-      if (chartype==CharTypes.DIGIT) {
-        thistoken+=untokenized[i];
+    else if (currcharnum==42 || currcharnum==43 || currcharnum==45 || currcharnum==47 || currcharnum==100) {
+      if (currTT!=TokenTypes.NONE) {
+      	operands.push(+currtoken);
+      	currtoken="";
       }
-      if (chartype==CharTypes.OPERATOR || chartype==CharTypes.NEGATIVE) {
-        tokenizedsequence.push(thistoken);
-        tokenizedsequence.push(untokenized[i]);
-        thistoken="";
-        thistokentype=TokenTypes.NONE;
+      let priority = OperatorPrios[inString[i]]+1000*paras;
+      while (operators.length>0 && priority<=operators.at(-1)[1]) {
+      	Evaluate(operators.pop(),operands);
       }
-      if (chartype==CharTypes.PAR_OPEN) {
-        tokenizedsequence.push(thistoken);
-        thistoken="";
-        paras=1;
-        thistokentype=TokenTypes.PARAS;
-      }
+      operators.push([currcharnum,priority]);
+      currTT=TokenTypes.NONE;
     }
-    else if (thistokentype==TokenTypes.PARAS) {
-      if (chartype==CharTypes.PAR_OPEN) {
-        thistoken+=untokenized[i];
-        paras+=1
-      }
-      else if (chartype==CharTypes.PAR_CLOSE) {
-        thistoken+=untokenized[i];
-        paras-=1
-        if (paras==0) {
-          tokenizedsequence.push(thistoken);
-          thistoken=""
-          thistokentype=TokenTypes.NONE;
-        }
-      }
-      else {
-        thistoken+=untokenized[i];
-      }
+    else if (currcharnum==40) {
+    	paras+=1;
+    	//Add multiplication before parenthesis?
     }
+    else if (currcharnum==41) {
+    	paras-=1;
+    }    
   }
-  if (thistokentype!=TokenTypes.NONE) {
-    tokenizedsequence.push(thistoken)
+  operands.push(+currtoken);
+  while (operators.length>0) {
+    Evaluate(operators.pop(),operands);
   }
-  return tokenizedsequence;
+  return operands[0];
 }
 
-function Calculator(untokenized) {
-  let inarr = Tokenize(untokenized);
-  for (let _pass=0;_pass<4;_pass++) {
-    let lastnum = -1;
-    for(let i=0;i<inarr.length;i++) {
-      if (_pass==0 && inarr[i][0] == "(") {
-        inarr[i]=Calculator(inarr[i].substring(1,inarr[i].length))
-      }
-      else if (_pass==1 && inarr[i] == "d" && i>0) {
-        let mods = new Set();
-        let m=2;
-        for (m=2; inarr[i+m]=="s" || inarr[i+m]=="d";m++) {
-          mods.add(inarr[i+m]);
-        }
-        inarr.splice(i+2,m-2);
-        let outs=[]
-        for (let j=0;j<parseInt(inarr[i-1]);j++) {
-          let thisr = ((Math.floor(Math.random()*parseInt(inarr[i+1]))+1))
-          outs.push(thisr.toString());
-        }
-        if (mods.has("s")) {
-          inarr.splice(i-1,3,outs.reduce((total,current)=>(parseInt(total)+parseInt(current)).toString()).toString());
-        }
-        else {
-          if (i>1) {
-            inarr=inarr.slice(0,i-1).concat(outs,inarr.slice(i+2))
-          }
-          else {
-            inarr=outs.concat(inarr.slice(i+2))
-          }
-        }
-        if (i!=0) {i--;}
-        console.log(inarr)
-      }
-
-      
-      else if (_pass==2 && inarr[i] == "*") {
-        inarr.splice(i-1,3,(parseInt(inarr[i-1])*parseInt(inarr[i+1])).toString());
-        if (i!=0) {i--;}
-      }
-      else if (_pass==2 && inarr[i] == "/") {
-        inarr.splice(i-1,3,(Math.round(parseInt(inarr[i-1])/parseInt(inarr[i+1]))).toString());
-        if (i!=0) {i--;}
-      }
-      else if (_pass==3 && inarr[i] == "+") {
-        inarr.splice(i-1,3,(parseInt(inarr[i-1])+parseInt(inarr[i+1])).toString());
-        if (i!=0) {i--;}
-      }
-      else if (_pass==3 && inarr[i] == "-") {
-        inarr.splice(i-1,3,(parseInt(inarr[i-1])-parseInt(inarr[i+1])).toString());
-        if (i!=0) {i--;}
-      }
-    }
+function Evaluate(op,operands) {
+  if (op[0]==42) {
+    operands.push(operands.pop()*operands.pop());
   }
-  return inarr;
+  else if (op[0]==43) {
+    operands.push(operands.pop()+operands.pop());
+  }
+  else if (op[0]==45) {
+    operands.push(-operands.pop()+operands.pop());
+  }
+  else if (op[0]==47) {
+    operands.push(operands.pop()/operands.pop());
+  }
+  else if (op[0]==100) {
+    let b = operands.pop();
+    let a = operands.pop();
+    let o=0;
+    for (let i = 0; i<a; i++) {
+      o+=Math.floor(Math.random()*b)+1;
+    }
+    operands.push(o);
+  }
 }
+console.log(Parse("100000000d6"));
+
+
+
+
+
+
+
+
+
+
