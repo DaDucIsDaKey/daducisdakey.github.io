@@ -1,0 +1,10 @@
+.charactersheet {
+  display: flex;
+  border-style: solid;
+}
+.vertical {
+    flex-flow:column nowrap;
+}
+.horizontal {
+    flex-flow: row nowrap;
+}
