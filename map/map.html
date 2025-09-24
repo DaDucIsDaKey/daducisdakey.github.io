@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="map.js" defer></script>
+    <script src="../plugins/jquery-3.7.1.min.js"></script>
+    <link rel="stylesheet" href="map.css">
+  </head>
+  <body>
+  
+    <h2>This plays GoL for now lol</h2>
+    <div class="map" id="map"></div>
+    <button onclick="document.getElementById('rollOutput').innerHTML = 'Ticking...';map.Update();document.getElementById('rollOutput').innerHTML = 'Done!';">Tick</button>   
+    <button onclick="map.Run();
+    if (map.running) {
+      document.getElementById('rollOutput').innerHTML='Running...';
+    }
+    else {
+      document.getElementById('rollOutput').innerHTML='Paused';
+    }
+    ">Play</button>   
+    <h1 id='rollOutput'>Paused</h1>
+  </body>
+</html>

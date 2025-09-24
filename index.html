@@ -1,23 +1,41 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link rel="stylesheet" href="css/directory.css">
+    <link rel="stylesheet" href="radial_menu/radial_menu.css">
+    <script src="plugins/jquery-3.7.1.min.js"></script>
+    <script src="radial_menu/radial_menu.js"></script>
+    <script src="radial_menu/LinkerMenuItem.js"></script>
+    <script src="radial_menu/RandomSummonerMenuItem.js"></script>
+    <script src="radial_menu/CustomSummonerMenuItem.js"></script>
+    <script>
+      $(function () {
+          new RadialMenu(5, $("#rm_o_index"), [250, 250], [{menuType: LinkerMenuItem,
+                                                              args: {name:"Parser",link:"parser/parser.html"}},
+                                                        {menuType: LinkerMenuItem,
+                                                              args: {name:"Character Sheet",link:"charactersheet/character.html"}},
+                                                        {menuType: CustomSummonerMenuItem,
+                                                              args: {name:"Game Of Life in here",size:1,children:
+                                                                  [{menuType:LinkerMenuItem,
+                                                                        args:{name:"Game Of Life",link:"map/map.html"}}]}},
+                                                        {menuType: LinkerMenuItem, args:{name:"Radial Menu",link:"radial_menu/radial_menu.html"}}],$("#rm_index"));
+      });
+    </script>
   </head>
-  <body>
+  <body style="position: relative;">
     <h1>BEHOLD: my stuff</h1>
-    <table>
-      <tr>
-        <td><a href="parser/parser.html">PARSER</a></td>
-        <td><a href="charactersheet/character.html">PARSER</a></td>
-      </tr>
-    </table>
-    <h2>You should go gambling!</h2>
-    <p>Roll dice below.</p>
-    <p>I would like to roll <input id='dice' type='text'>.</p>
-    <button onclick="document.getElementById('rollOutput').innerHTML = 'Rolling...';document.getElementById('rollOutput').innerHTML = Calculator(document.getElementById('dice').value)">Roll!</button>   
-    <h1 id='rollOutput'>Output</h1>
+
     <button onclick="document.getElementById('myImage').src='bulbon.png'">Turn on the light</button>
     <img id="myImage" src="bulboff.png" style="width:100px">
     <button onclick="document.getElementById('myImage').src='bulboff.png'">Turn off the light</button>
+    <img id="myImage" src="bulboff.png" style="width:100px">
+    <img id="myImage" src="bulboff.png" style="width:100px">
+    <img id="myImage" src="bulboff.png" style="width:100px">
+    <div id="rm_o_index" style="min-width: 500px;min-height: 500px;">
+      <div id="rm_index">
+
+      </div>
+    </div>
     
   </body>
 </html>

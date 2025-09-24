@@ -1,0 +1,14 @@
+.grid {
+    display: grid;
+}
+.grid-1 {
+    background-color:rgb(18,10,143);
+    grid-template-columns: auto auto;
+    gap: 15px;
+}
+.grid-element {
+    background-color: lightblue;
+    border:rgb(18,10,143);
+    border-style:solid;
+    border-width: 1;
+}
