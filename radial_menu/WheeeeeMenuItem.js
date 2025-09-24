@@ -5,7 +5,7 @@ class WheeeeeMenuItem extends MenuItem {
 \    */
     constructor(args) { 
         super(args.name, 1);
-        this.color="#aaaaaa";
+        this.color="#eeeeee";
 
     }
     click(parent) {
