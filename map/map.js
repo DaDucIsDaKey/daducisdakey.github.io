@@ -1,6 +1,6 @@
 class Map {
     constructor() {
-        this.size=20;
+        this.size=30;
         this.running=false;
         this.speed=250;
         this.currtimeout=0;
