@@ -1,5 +1,5 @@
 .map{   
     display: grid;
-    grid-template-rows: repeat(20,40px);
-    grid-template-columns: repeat(20,40px);
+    grid-template-rows: repeat(30,40px);
+    grid-template-columns: repeat(30,40px);
 }
