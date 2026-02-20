@@ -4,6 +4,7 @@ class Map {
         this.running=false;
         this.speed=250;
         this.currtimeout=0;
+        this.states=4;
         this.Reset();
     }
 
@@ -26,7 +27,7 @@ class Map {
                 let size=this.size;
                 let mp = this;
                 this.cell.addEventListener("click",function() {
-                    setCell(this,(1+$(this).attr("data-celltype"))%3)
+                    setCell(this,(1+$(this).attr("data-celltype"))%this.states)
                     mp.background[$(this).attr("data-row")][$(this).attr("data-col")]=$(this).attr("data-celltype")
                 });
                 this.rep.appendChild(this.cell);
@@ -66,6 +67,9 @@ class Map {
                     newbackground[i][j]=2;
                 }
                 else if (this.background[i][j]==2) {
+                    newbackground[i][j]=2;
+                }
+                else if (this.background[i][j]==3) {
                     newbackground[i][j]=0;
                 }
 
