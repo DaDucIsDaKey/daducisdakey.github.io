@@ -4,7 +4,7 @@ class Map {
         this.running=false;
         this.speed=250;
         this.currtimeout=0;
-        this.states=4;
+        this.states=3;
         this.Reset();
     }
 
