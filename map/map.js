@@ -67,9 +67,6 @@ class Map {
                     newbackground[i][j]=2;
                 }
                 else if (this.background[i][j]==2) {
-                    newbackground[i][j]=3;
-                }
-                else if (this.background[i][j]==3) {
                     newbackground[i][j]=0;
                 }
 
