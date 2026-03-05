@@ -108,5 +108,5 @@ function callUpdate() {
 
 function setCell(cell,a) {
     $(cell).attr("data-celltype",a);
-    $(cell).attr("style","background-color:hsl("$(cell).attr("data-celltype")*30",100%,50%);");
+    $(cell).attr("style","background-color:hsl("$+(cell).attr("data-celltype")*30+",100%,50%);");
 }
